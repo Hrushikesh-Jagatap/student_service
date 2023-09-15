@@ -45,6 +45,13 @@ const studentSchema = new mongoose.Schema(
         phone_number: String,
       },
     ],
+       req_status: [
+    {
+      tid: Number,
+      status: String,
+      about: String
+    },
+  ],
     assignmentId: [String],
     isDeleted: {
       type: Boolean,

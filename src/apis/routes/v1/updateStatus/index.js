@@ -1,18 +1,17 @@
 const express = require('express');
-
 const router = express.Router();
+const UpdatestatusController = require('@controllers/v1/updatestatus');
 
-const updateStatusController = require('@root/src/apis/controllers/v1/updateStatus')
-
-router.put('/status/teacher_id/student_id', async(req, res) => {
+router.put('/status/:id', async (req, res) => {
     try {
-        const result = await updateStatusController(req, res);
-        res.status(201).json(result);
+        // Extract the necessary data from the request body
+        // const { batchName, startDate, endDate } = req.body;
+        const result = await UpdatestatusController.updatestatus(req, res);
+        res.send(result);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal server error' });
-    } 
-
+    }
 });
 
 module.exports = router;

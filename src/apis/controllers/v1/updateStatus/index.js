@@ -1,21 +1,21 @@
-const StudentService = require('@root/src/apis/services/v1/updateStatus');
 
-// Controller function to update a student by ID
-const updateStudentById = async (req, res) => {
+const StudentService = require('@services/v1/Updatestatus');
+
+// Controller function to update a teacher by ID
+const updatestatus = async (req, res) => {
   try {
-    const updatedStudent = await StudentService.updateStudentById(req.params.id, req.body);
+    const updatedTeacher = await StudentService.updatestatus(req.params.id, req.body);
     const result = {
       data: null,
       success: false,
-      error: 'Error in updating  student By StudentId',
+      error: 'Error in updating Teacher',
+    };
+    if (!updatedTeacher) {
+      return result;
     }
-    if (!updatedStudent) {
-      res.result;
-    }
-    result.data = updatedStudent;
+    result.data = updatedTeacher;
     result.success = true;
     return result;
-
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal server error' });
@@ -23,5 +23,5 @@ const updateStudentById = async (req, res) => {
 };
 
 module.exports = {
-  updateStudentById,
+  updatestatus,
 };
