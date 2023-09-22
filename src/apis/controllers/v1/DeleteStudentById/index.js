@@ -20,9 +20,5 @@ const deleteStudentById = async (req, res) => {
 
 
 module.exports = {
-    deleteExamById
-};
-
-module.exports = {
     deleteStudentById
 }
