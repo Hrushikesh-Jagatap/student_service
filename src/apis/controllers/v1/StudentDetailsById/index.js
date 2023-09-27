@@ -1,23 +1,21 @@
 const StudentService = require('@root/src/apis/services/v1/StudentDetailsById');
+const { HttpResponseHandler } = require('intelli-utility');
+
 
 // Controller function to get a single student by ID
-const getStudentById = async (req, res) => {
+const getStudentById = async (req, res, next) => {
+
     try {
         const student = await StudentService.getStudentById(req.params.id.toString());
-        const result = {
-            data: null,
-            success: false,
-            error: 'Error in Finding  student',
-        }
+
         if (!student) {
-            res.result
+            return HttpResponseHandler.success(req, res, student);
         }
-        result.data = student;
-        result.success = true;
-        return result;
+
+        return HttpResponseHandler.success(req, res, student);
+
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
+        next(error);
     }
 };
 

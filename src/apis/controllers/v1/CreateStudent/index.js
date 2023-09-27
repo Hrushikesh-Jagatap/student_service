@@ -1,24 +1,19 @@
 
 const StudentService = require('@root/src/apis/services/v1/CreateStudent');
+const { HttpResponseHandler } = require('intelli-utility');
 
 // Controller function to create a new student
 const createStudent = async (req, res) => {
     try {
         const newStudent = await StudentService.createStudent(req.body);
-        const result = {
-            data: null,
-            success: false,
-            error: 'Error in creating  new   student ',
-        }
+
         if (!newStudent) {
-            res.result;
+            return HttpResponseHandler.success(req, res, newStudent);
         }
-        result.data = newStudent;
-        result.success = true;
-        return result;
+        return HttpResponseHandler.success(req, res, newStudent);
+
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
+        next(error);
     }
 };
 
