@@ -3,7 +3,7 @@ const { HttpResponseHandler } = require('intelli-utility');
 
 
 // Controller function to update a student by ID
-const updateStudentById = async (req, res) => {
+const updateStudentById = async (req, res, next) => {
   try {
     const updatedStudent = await StudentService.updateStudentById(req.params.id, req.body);
 
