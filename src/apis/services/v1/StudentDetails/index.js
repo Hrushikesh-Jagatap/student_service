@@ -1,6 +1,6 @@
 const StudentData = require('@root/src/apis/models/Student');
 
-// Service function to get all teachers
+// Service function to get all students
 const getAllStudent = async () => {
   try {
     const student = await StudentData.find();
