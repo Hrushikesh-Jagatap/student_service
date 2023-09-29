@@ -10,7 +10,7 @@ const updateStudentStatus = async (studentId, studentData) => {
       throw new Error('Student not found');
     }
 
-const { tid, status, about } = studentData;
+let { tid, status, about, subject, flag,classes } = studentData;
     let existingStatus = student.req_status.find((reqStatus) => reqStatus.tid == tid);
 
 
@@ -20,12 +20,63 @@ const { tid, status, about } = studentData;
 
     if (existingStatus) {
       existingStatus.status = status;
-      existingStatus.about = about;
+      // existingStatus.about = about;
     } else {
-      student.req_status.push({ tid, status, about });
+      student.req_status.push({ tid, status, about,subject, flag, classes });
     }
 
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
     const updatedStudent = await student.save();
+    if(status == "Accepted") {
+    console.log(updatedStudent.req_status.length)
+    let size=updatedStudent.req_status.length;
+    for(let i=0; i<size; i++) {
+     if(updatedStudent.req_status[i].status=="requested" && updatedStudent.req_status[i].subject==subject &&  updatedStudent.req_status[i].classes==classes){
+      // if(flag==true){
+        updatedStudent.req_status[i].flag=false;
+        //  flag="false";
+
+      // }    
+    
+      const abc=await updatedStudent.save();
+       console.log(abc)
+ 
+
+     }
+    }
+  }
+    //if(updatedStudent.req_status[].status="requested" && updatedStudent.)
+
+  // if(status == "Accepted") {
+    
+  //   //  let existingStatus = student.req_status.find((reqStatus) => reqStatus.tid == tid,);
+  //   const students = await StudentData.find({ student_id: studentId });
+  //  // ,{"reqStatus.subject" :subject},{"reqStatus.classes":classes}
+  // //  if()
+  // //   console.log(students.length);
+  // //   console.log(students)
+  // if(students)
+  
+  // {
+  //   flag=false;
+  //    student.req_status.push({ tid, status, about,subject, flag, classes });
+  //     const updatedStudent1 = await student.save();
+
+  // }
+  // }
 
     if (status == "requested") {
       const config = {
@@ -41,6 +92,9 @@ const { tid, status, about } = studentData;
           sid: studentId,
           status: status,
           about: about,
+          subject:subject,
+          classes:classes,
+          flag:flag,
         },
       };
 
@@ -48,6 +102,7 @@ const { tid, status, about } = studentData;
       console.log('Student status updated:', studentUpdateResult.data);
     }
 
+ 
     return updatedStudent;
   } catch (error) {
     console.error('Error updating student status:', error.message);

@@ -49,7 +49,10 @@ const studentSchema = new mongoose.Schema(
     {
       tid: Number,
       status: String,
-      about: String
+      about: String,
+      subject: String,
+      classes: String,
+      flag:Boolean,
     },
   ],
     assignmentId: [String],
