@@ -1,7 +1,7 @@
 // const StudentService = require('@root/src/apis/services/v1/updateStatus');
 const { HttpResponseHandler } = require('intelli-utility');
 
-const StudentService = require('@services/v1/Updatestatus');
+const StudentService = require('@services/v1/updateStatus');
 
 // Controller function to update a teacher by ID
 const updatestatus = async (req, res) => {
