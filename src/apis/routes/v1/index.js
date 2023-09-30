@@ -2,13 +2,13 @@ const express = require('express');
 
 const router = express.Router();
 
-const StudentDetails = require('./StudentDetails');
+const StudentDetails = require('./StudentDetails'); // done
 
-const CreateStudent = require('./CreateStudent');
+const CreateStudent = require('./CreateStudent'); // done
 
-const StudentDetailsById = require('./StudentDetailsById')
+const StudentDetailsById = require('./StudentDetailsById') // done
 
-const UpdateStudentById = require('./UpdateStudentById');
+const UpdateStudentById = require('./UpdateStudentById'); // done
 
 // const NotificationRoute = require('./Notification');
 

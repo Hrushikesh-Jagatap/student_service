@@ -6,7 +6,7 @@ const getUserById = async (userId) => {
       const student = await StudentData.findOne({userId:userId});
       return student;
     } catch (error) {
-      throw new Error('Failed to get student');
+      throw new Error('Failed to get student By UserId');
     }
   };
 

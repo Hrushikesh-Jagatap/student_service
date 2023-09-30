@@ -1,23 +1,20 @@
 const StudentService = require('@services/v1/StudentDetails');
+const { HttpResponseHandler } = require('intelli-utility');
 
-// Controller function to get all teachers
-const getAllStudent = async (req, res) => {
+// Controller function to get all students
+const getAllStudent = async (req, res, next) => {
   try {
+
     const students = await StudentService.getAllStudent();
-    const result = {
-      data: null,
-      success: false,
-      error: 'Error in Finding  All student',
-    }
+
     if (!students) {
-      res.result
+      return HttpResponseHandler.success(req, res, students);
     }
-    result.data = students;
-    result.success = true;
-    return result;
+    
+    return HttpResponseHandler.success(req, res, students);
+
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
+    next(error);
   }
 };
 

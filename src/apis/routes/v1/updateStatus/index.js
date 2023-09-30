@@ -4,10 +4,7 @@ const UpdatestatusController = require('@controllers/v1/updatestatus');
 
 router.put('/status/:id', async (req, res) => {
     try {
-        // Extract the necessary data from the request body
-        // const { batchName, startDate, endDate } = req.body;
-        const result = await UpdatestatusController.updatestatus(req, res);
-        res.send(result);
+        const result = await updateStatusController(req, res);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal server error' });

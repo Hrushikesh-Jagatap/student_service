@@ -73,6 +73,10 @@ const studentSchema = new mongoose.Schema(
       type: String,
       default: null,
     },
+    isDeleted: {
+      type: Boolean,
+      default: false
+    },
     additional_info: String,
   },
   { timestamps: { createdAt: true, updatedAt: true }, versionKey: false }

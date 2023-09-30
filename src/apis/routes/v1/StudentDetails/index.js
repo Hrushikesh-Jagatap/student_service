@@ -4,13 +4,11 @@ const router = express.Router();
 
 const StudentDetailsControllers = require('@root/src/apis/controllers/v1/StudentDetails')
 
-router.get('/students',async(req, res) => {
+router.get('/students', async (req, res, next) => {
     try {
-        const result = await StudentDetailsControllers.getAllStudent(req, res);
-        res.status(201).json({result});
+        const result = await StudentDetailsControllers.getAllStudent(req, res, next);
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
+        next(error);
     }
 });
 module.exports = router;

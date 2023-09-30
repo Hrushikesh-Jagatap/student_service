@@ -1,24 +1,21 @@
+// const StudentService = require('@root/src/apis/services/v1/updateStatus');
+const { HttpResponseHandler } = require('intelli-utility');
 
 const StudentService = require('@services/v1/Updatestatus');
 
 // Controller function to update a teacher by ID
 const updatestatus = async (req, res) => {
   try {
-    const updatedTeacher = await StudentService.updateStudentStatus(req.params.id, req.body);
-    const result = {
-      data: null,
-      success: false,
-      error: 'Error in updating Teacher',
-    };
-    if (!updatedTeacher) {
-      return result;
+    const updatedStudent = await StudentService.updateStudentById(req.params.id, req.body);
+
+    if (!updatedStudent) {
+      return HttpResponseHandler.success(req, res, updatedStudent);
+
     }
-    result.data = updatedTeacher;
-    result.success = true;
-    return result;
+    return HttpResponseHandler.success(req, res, updatedStudent);
+
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
+    next(error)
   }
 };
 
