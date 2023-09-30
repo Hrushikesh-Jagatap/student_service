@@ -6,7 +6,7 @@ const StudentService = require('@services/v1/Updatestatus');
 // Controller function to update a teacher by ID
 const updatestatus = async (req, res) => {
   try {
-    const updatedStudent = await StudentService.updateStudentById(req.params.id, req.body);
+    const updatedStudent = await StudentService.updateStudentStatus(req.params.id, req.body);
 
     if (!updatedStudent) {
       return HttpResponseHandler.success(req, res, updatedStudent);
