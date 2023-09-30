@@ -1,17 +1,14 @@
 const express = require('express');
-
 const router = express.Router();
+const UpdatestatusController = require('@controllers/v1/updatestatus');
 
-const updateStatusController = require('@root/src/apis/controllers/v1/updateStatus')
-
-router.put('/status/teacher_id/student_id', async(req, res) => {
+router.put('/status/:id', async (req, res) => {
     try {
         const result = await updateStatusController(req, res);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal server error' });
-    } 
-
+    }
 });
 
 module.exports = router;

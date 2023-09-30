@@ -1,8 +1,10 @@
-const StudentService = require('@root/src/apis/services/v1/updateStatus');
+// const StudentService = require('@root/src/apis/services/v1/updateStatus');
 const { HttpResponseHandler } = require('intelli-utility');
 
-// Controller function to update a student by ID
-const updateStudentById = async (req, res) => {
+const StudentService = require('@services/v1/Updatestatus');
+
+// Controller function to update a teacher by ID
+const updatestatus = async (req, res) => {
   try {
     const updatedStudent = await StudentService.updateStudentById(req.params.id, req.body);
 
@@ -18,5 +20,5 @@ const updateStudentById = async (req, res) => {
 };
 
 module.exports = {
-  updateStudentById,
+  updatestatus,
 };
