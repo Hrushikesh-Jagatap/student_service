@@ -10,73 +10,33 @@ const updateStudentStatus = async (studentId, studentData) => {
       throw new Error('Student not found');
     }
 
-let { tid, status, about, subject, flag,classes } = studentData;
-    let existingStatus = student.req_status.find((reqStatus) => reqStatus.tid == tid);
-
-
-
-
-
+    let { tid, status, about, subject, flag, classes } = studentData;
+    let existingStatus = student.req_status.find(
+      (reqStatus) => reqStatus.tid == tid && reqStatus.subject == subject && reqStatus.classes == classes
+    );
 
     if (existingStatus) {
       existingStatus.status = status;
-      // existingStatus.about = about;
     } else {
-      student.req_status.push({ tid, status, about,subject, flag, classes });
+      student.req_status.push({ tid, status, about, subject, flag, classes });
     }
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
 
     const updatedStudent = await student.save();
-    if(status == "Accepted") {
-    console.log(updatedStudent.req_status.length)
-    let size=updatedStudent.req_status.length;
-    for(let i=0; i<size; i++) {
-     if(updatedStudent.req_status[i].status=="requested" && updatedStudent.req_status[i].subject==subject &&  updatedStudent.req_status[i].classes==classes){
-      // if(flag==true){
-        updatedStudent.req_status[i].flag=false;
-        //  flag="false";
 
-      // }    
-    
-      const abc=await updatedStudent.save();
-       console.log(abc)
- 
+    if (status == "Accepted") {
+      // Push the new teacher data into the teacher_id array
+      const newTeacherData = { teacher_id: tid, subject, classes };
+      updatedStudent.teacher_id.push(newTeacherData);
 
-     }
+      // Update flag for specific conditions
+      updatedStudent.req_status.forEach((reqStatus) => {
+        if (reqStatus.status == "requested" && reqStatus.subject == subject && reqStatus.classes == classes) {
+          reqStatus.flag = false;
+        }
+      });
+
+      await updatedStudent.save();
     }
-  }
-    //if(updatedStudent.req_status[].status="requested" && updatedStudent.)
-
-  // if(status == "Accepted") {
-    
-  //   //  let existingStatus = student.req_status.find((reqStatus) => reqStatus.tid == tid,);
-  //   const students = await StudentData.find({ student_id: studentId });
-  //  // ,{"reqStatus.subject" :subject},{"reqStatus.classes":classes}
-  // //  if()
-  // //   console.log(students.length);
-  // //   console.log(students)
-  // if(students)
-  
-  // {
-  //   flag=false;
-  //    student.req_status.push({ tid, status, about,subject, flag, classes });
-  //     const updatedStudent1 = await student.save();
-
-  // }
-  // }
 
     if (status == "requested") {
       const config = {
@@ -90,11 +50,11 @@ let { tid, status, about, subject, flag,classes } = studentData;
         },
         data: {
           sid: studentId,
-          status: status,
-          about: about,
-          subject:subject,
-          classes:classes,
-          flag:flag,
+          status,
+          about,
+          subject,
+          classes,
+          flag,
         },
       };
 
@@ -102,7 +62,6 @@ let { tid, status, about, subject, flag,classes } = studentData;
       console.log('Student status updated:', studentUpdateResult.data);
     }
 
- 
     return updatedStudent;
   } catch (error) {
     console.error('Error updating student status:', error.message);

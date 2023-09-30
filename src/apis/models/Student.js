@@ -36,6 +36,11 @@ const studentSchema = new mongoose.Schema(
         teacher_id: String,
       },
     ],
+    teacher_id:[{
+      teacher_id:String,
+      subject:String,
+      classes:String,
+    }],
     guardians: [
       {
         first_name: String,
@@ -47,7 +52,7 @@ const studentSchema = new mongoose.Schema(
     ],
        req_status: [
     {
-      tid: Number,
+      tid: String,
       status: String,
       about: String,
       subject: String,
