@@ -1,5 +1,5 @@
 const StudentData = require('@models/Student');
-const { loadBalancer, SYSTEM_TOKEN } = require('@config');
+const { loadBalancer, SYSTEM_TOKEN,teacher } = require('@config');
 const axios = require('axios');
 
 const updateStudentStatus = async (studentId, studentData) => {
@@ -41,7 +41,7 @@ const updateStudentStatus = async (studentId, studentData) => {
     if (status == "requested") {
       const config = {
         method: 'put',
-        url: `${loadBalancer}/tms/apis/v1/status/${tid}`,
+        url: `${teacher}/tms/apis/v1/status/${tid}`,
         headers: {
           app_name: 'teacherApp',
           app_version_code: '101',
