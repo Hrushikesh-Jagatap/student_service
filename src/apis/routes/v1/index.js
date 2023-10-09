@@ -18,6 +18,8 @@ const GetByuserId = require('./GetByUserId')
 
 const updateStatus = require("./updateStatus")
 
+const splash = require('./splashApi')
+router.use('/', splash)
 
 // Route to get all students
 router.use('/', StudentDetails);
