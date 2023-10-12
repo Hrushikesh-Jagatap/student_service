@@ -11,12 +11,14 @@ const StudentDetailsById = require('./StudentDetailsById') // done
 const UpdateStudentById = require('./UpdateStudentById'); // done
 
 // const NotificationRoute = require('./Notification');
+const PersonalDetails = require('./PersonalDetails'); // 
 
 const DeleteStudentById = require('./DeleteStudentById')
 
 const GetByuserId = require('./GetByUserId')
 
 const updateStatus = require("./updateStatus")
+router.use('/', PersonalDetails); // api for updated persponal details
 
 const splash = require('./splashApi')
 router.use('/', splash)
