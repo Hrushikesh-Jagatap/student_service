@@ -14,7 +14,7 @@ const UpdateStudentById = require('./UpdateStudentById'); // done
 const PersonalDetails = require('./PersonalDetails'); // 
 
 const DeleteStudentById = require('./DeleteStudentById')
-
+const EducationDetails = require("./EducationDetails")
 const GetByuserId = require('./GetByUserId')
 
 const updateStatus = require("./updateStatus")
@@ -37,7 +37,7 @@ router.use('/', UpdateStudentById);
 
 // Route to delete a delete by ID
 router.use('/', DeleteStudentById);
-
+router.use('/', EducationDetails);
 // Route to get student by userId
 router.use('/', GetByuserId);
 
