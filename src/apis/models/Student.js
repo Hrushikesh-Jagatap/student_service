@@ -38,6 +38,16 @@ const studentSchema = new mongoose.Schema(
         default: null
       },
 
+      gender: {
+        type: String,
+        default: null
+      },
+
+      language: {
+        type:String,
+        default: null
+      },
+
       phone_number: {
         type: String,
         default: null
@@ -123,24 +133,31 @@ const studentSchema = new mongoose.Schema(
         },
       ],
     },
- educationDetails: {
+
+    educationDetails: {
+
       class: {
         type: String,
         default: null
       },
+
       Board: {
         type: String,
         default: null
       },
+
       prefferedSub: [{
         type: String,
         default: null
       }],
+
       lastClassPerformance: {
         type: String,
         default: null
       }
+
     },
+
     enrolled_batch: [
       {
         batch_id: String,
@@ -178,7 +195,7 @@ const studentSchema = new mongoose.Schema(
     },
 
     assignmentId: [String],
-    
+
     isDeleted: {
       type: Boolean,
       default: false,
