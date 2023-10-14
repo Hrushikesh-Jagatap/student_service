@@ -3,21 +3,17 @@ const AppVersion = require('@models/AppVersion');
 const getSplashData = async (userId) => {
   try {
     
-    const user = await StudentData.findOne({ userId: userId });
+    const user = await StudentData.findOne({ userId: userId }).lean();
     if (!user) {
       throw new Error('User not found');
     }
     const appVersions = await AppVersion.findOne({});
-    const result = {
-      name: user.first_name + (user.last_name ? ' ' + user.last_name : ''),
-      email: user.email,
-      phone: user.phone_number,
-      address: user.address,
-      batch_taught: user.batch_taught,
-      appVersions: appVersions || {}
-    };
+       const response = {
+      user:user,
+      appVersions: appVersions ?? {},
+       };
+    return response;
     
-    return result;
   } catch (error) {
     throw error;
   }
