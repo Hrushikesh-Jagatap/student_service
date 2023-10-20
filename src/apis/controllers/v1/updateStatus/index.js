@@ -15,7 +15,8 @@ const updatestatus = async (req, res) => {
     return HttpResponseHandler.success(req, res, updatedStudent);
 
   } catch (error) {
-    next(error)
+  console.log(error);
+    //  next(error)
   }
 };
 
