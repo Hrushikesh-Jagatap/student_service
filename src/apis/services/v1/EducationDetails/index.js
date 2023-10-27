@@ -9,6 +9,7 @@ const updatedEducationalDetailsById = async (userId, updatedEducationalDetails) 
         status: 404,
         message: 'STUDENT_NOT_FOUND',
       };
+ }
     const mergedEducationalDetails = _.merge({}, user.educationDetails, updatedEducationalDetails);
     const updatedStudent = await studentData.findOneAndUpdate(
       { userId: userId },
