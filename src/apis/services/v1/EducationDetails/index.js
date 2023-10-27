@@ -4,9 +4,11 @@ const _ = require('lodash');
 const updatedEducationalDetailsById = async (userId, updatedEducationalDetails) => {
   try {
     const user = await studentData.findOne({ userId: userId });
-    if (!user) {
-      return "User not found In Db"
-    }
+ if (user === null) {
+      return {
+        status: 404,
+        message: 'STUDENT_NOT_FOUND',
+      };
     const mergedEducationalDetails = _.merge({}, user.educationDetails, updatedEducationalDetails);
     const updatedStudent = await studentData.findOneAndUpdate(
       { userId: userId },
