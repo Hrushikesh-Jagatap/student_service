@@ -1,7 +1,31 @@
 const StudentData = require('@models/Student');
 const { loadBalancer, SYSTEM_TOKEN ,teacher} = require('@config');
 const axios = require('axios');
-
+const getTeacher = async (args) => {
+  console.log('user id is', args);
+  // const userId = args.toString();
+  // let { userId.toString()} = args
+  try {
+    const config = {
+      method: 'get',
+      url: `${teacher}/tms/apis/v1/user/${args}`,
+      headers: {
+        app_name: 'teacherApp',
+        app_version_code: '101',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${SYSTEM_TOKEN}`,
+      },
+    };
+    const result = await axios(config);
+    if (result?.data) {
+      return result.data;
+    }
+    return null;
+  } catch (error) {
+    console.log(error);
+    // throw new ORDER_SERVICE_ERROR(error);
+  }
+};
 const updateStudentStatus = async (sid_userId, studentData) => {
   try {
     const student = await StudentData.findOne({ userId: sid_userId });
@@ -21,7 +45,11 @@ const updateStudentStatus = async (sid_userId, studentData) => {
     if (existingStatus) {
       existingStatus.status = status;
     } else {
-      student.req_status.push({ tid_userId, status, about, subject, flag, classes });
+     const abc = await getTeacher(tid_userId);
+ console.log(abc.data);
+  let name=abc.data.personalDetails.first_name ;
+    let profileimage=abc.data.personalDetails.profileImage;
+      student.req_status.push({ tid_userId, status, about, subject, flag, classes,name, profileimage});    
     }
 
     const updatedStudent = await student.save();
