@@ -5,7 +5,7 @@ const {
 // Service function to get a single user by ID
 const getUserById = async (userId) => {
     try {
-    const data = await StudentData.findOne({ userId: userId });
+    const data = await StudentData.find({ userId: userId });
   
 return data;
   } catch (error) {
