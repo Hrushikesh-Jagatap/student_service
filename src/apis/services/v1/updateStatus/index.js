@@ -30,12 +30,15 @@ const getTeacher = async (args) => {
 
 const updateStudentStatus = async (sid_userId, studentData) => {
   try {
+    console.log("sid",sid_userId)
     const student = await StudentData.findOne({ userId: sid_userId });
     console.log("******",student);
     const { personalDetails } = student;
       console.log("******",personalDetails);
     const { first_name } = personalDetails;
-     console.log("******",first_name);
+       console.log("******",first_name);
+    const first_name1=student.personalDetails.first_name;
+   console.log("666666******",first_name1);
 
     if (student === null) {
       return {
