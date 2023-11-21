@@ -31,8 +31,11 @@ const getTeacher = async (args) => {
 const updateStudentStatus = async (sid_userId, studentData) => {
   try {
     const student = await StudentData.findOne({ userId: sid_userId });
+    console.log("******",student);
     const { personalDetails } = student;
+      console.log("******",personalDetails);
     const { first_name } = personalDetails;
+     console.log("******",first_name);
 
     if (student === null) {
       return {
