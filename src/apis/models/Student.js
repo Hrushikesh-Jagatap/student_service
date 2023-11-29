@@ -223,6 +223,10 @@ const studentSchema = new mongoose.Schema(
       type: String,
       default: null
     },
+     isadmin:{
+    type:Boolean,
+    default:false,
+  },
   },
 
   { timestamps: { createdAt: true, updatedAt: true }, versionKey: false }
